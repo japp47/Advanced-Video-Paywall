@@ -10,7 +10,7 @@ const app = new Hono()
         async (c) => {
             const session = c.get("authUser")
             if(!session.token?.email) {
-                return c.json({isPremium: false});
+                return c.json({ error: "unauthorized"}, 401);
             }
             const [user] = await db.select().from(users).where(eq(users.email, session.token.email));
 

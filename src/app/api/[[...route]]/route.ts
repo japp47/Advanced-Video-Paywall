@@ -9,13 +9,15 @@ export const runtime = "nodejs"
 
 function getAuthConfig(c: Context): AuthConfig {
     return {
-        secret: process.env.AUTH_SECRET,
+        secret: c.env.AUTH_SECRET,
         ...authConfig
     }
 }
 const app = new Hono().basePath('/api')
-const routes = app.route('/user', userRoutes);
+
 app.use("*", initAuthConfig(getAuthConfig))
+
+const routes = app.route('/user', userRoutes);
 
 export const GET = handle(app);
 export const POST = handle(app);
