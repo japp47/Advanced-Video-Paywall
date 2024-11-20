@@ -5,6 +5,8 @@ import authConfig from "@/auth.config";
 
 import userRoutes from "@/app/api/[[...route]]/user"
 import paymentsRoute from "@/app/api/[[...route]]/payments"
+import videosRoute from "@/app/api/[[...route]]/video"
+
 export const runtime = "nodejs"
 
 
@@ -23,6 +25,7 @@ const app = new Hono().basePath('/api')
 app.use("*", initAuthConfig(getAuthConfig))
 
 const routes = app.route('/user', userRoutes).route('/payments', paymentsRoute)
+    .route("/videos", videosRoute)
 
 export const GET = handle(app);
 export const POST = handle(app);
