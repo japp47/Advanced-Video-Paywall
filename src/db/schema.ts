@@ -19,12 +19,10 @@ import {
     email: text("email").unique(),
     emailVerified: timestamp("emailVerified", { mode: "date" }),
     image: text("image"),
-    isPremium: boolean("isPremium").$default(() => false)
+    isPremium: boolean("isPremium").$defaultFn(() => false)
   })
    
-  export const accounts = pgTable(
-    "account",
-    {
+  export const accounts = pgTable("account", {
       userId: text("userId")
         .notNull()
         .references(() => users.id, { onDelete: "cascade" }),

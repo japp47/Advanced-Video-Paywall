@@ -5,7 +5,7 @@ import { eq } from "drizzle-orm";
 import { Hono } from "hono"
 
 const app = new Hono()
-    .get('/is-premium', 
+    .get("/is-premium", 
         verifyAuth(),
         async (c) => {
             const session = c.get("authUser")

@@ -1,17 +1,17 @@
 "use client";
-import { Button } from '@/components/ui/button';
 import { useCheckPremium } from '@/lib/hooks/users/user-check-premium'
 import React from 'react'
+import { Upgrade } from './upgrade';
 
 export const VideoPlayer = () => {
 
     const {
         data: isPremium,
-        isLoading,
+        isPending,
         isError
     } = useCheckPremium();
 
-    if(isLoading) {
+    if(isPending) {
         return <div>Loading...</div>;
     }
     if(isError) {
@@ -20,14 +20,7 @@ export const VideoPlayer = () => {
     if(!isPremium) {
         return <div>
           <p>Upgrade to premium to watch the video</p>
-            <Button 
-              className='w-full mt-2'
-              onClick={() => {
-                alert("Upgrde to premium")
-              }}
-            > 
-              Upgrade 
-            </Button>
+            <Upgrade />
         </div>;
     }
   return (
